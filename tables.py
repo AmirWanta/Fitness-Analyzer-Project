@@ -12,7 +12,7 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     email = Column(String(255), unique=True, nullable=False)
-    password_hash = Column(String(255), nullable=False)
+    password = Column(String(255), nullable=False)
     unit = Column(String(2), nullable=False, default="lb")
     training_mode = Column(String(32), nullable=False, default="powerlifting")
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
@@ -33,12 +33,12 @@ class Set(Base):
     reps = Column(Integer, nullable=False)
     weight = Column(Float , nullable=False)
     is_top_set = Column(Boolean, nullable=False, default=False)
-    rpe = Column(Integer, nullable=False)
+    rpe = Column(Float, nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
     __table_args__ = (
         CheckConstraint("weight > 0", name="check_weight_positive"),
         CheckConstraint("reps > 0", name="check_positive_reps"),
         CheckConstraint("rpe >= 6 AND rpe <= 10", name="check_rpe_range"),
-
+    
     )
