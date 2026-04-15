@@ -17,6 +17,7 @@ class SetCreate(BaseModel):
     rpe: Optional[float] = Field(None, ge=6, le=10)
     reps: int
     weight: float
+    is_top_set: Optional[bool] = None
 
 class SetRead(BaseModel):
     id: int
@@ -30,6 +31,11 @@ class SetRead(BaseModel):
 
     model_config = {"from_attributes": True}
 
+class SetUpdate(BaseModel):
+    rpe: Optional[float] = Field(None, ge=6, le=10)
+    reps: Optional[int] = None
+    weight: Optional[float] = None
+    is_top_set: Optional[bool] = None
 
 class SessionCreate(BaseModel):
     user_id: int
@@ -46,13 +52,6 @@ class SessionRead(BaseModel):
     model_config = {"from_attributes": True}
 
 
-"""
-class OneRMCreate(BaseModel):
-    one_rm: float
-    date: datetime
-    notes: Optional[str]
-    exercise_id: int
-"""
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -68,3 +67,12 @@ class UserRead(BaseModel):
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+class LoginInfo(BaseModel):
+    email: EmailStr
+    password: str
+
+class OneRmRead(BaseModel):
+    weight: float
+    reps: int
+    estimated_1rm: float

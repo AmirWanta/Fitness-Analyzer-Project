@@ -1,6 +1,7 @@
 from database import Base
-from datetime import datetime
+from datetime import datetime, date
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Date, Float, Boolean, CheckConstraint
+
 
 
 class Exercise(Base):
@@ -25,6 +26,7 @@ class Session(Base):
     notes= Column(String(255), nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
+
 class Set(Base):
     __tablename__ = "sets"
     id = Column(Integer, primary_key=True)
@@ -35,10 +37,12 @@ class Set(Base):
     is_top_set = Column(Boolean, nullable=False, default=False)
     rpe = Column(Float, nullable=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-
+    
     __table_args__ = (
         CheckConstraint("weight > 0", name="check_weight_positive"),
         CheckConstraint("reps > 0", name="check_positive_reps"),
         CheckConstraint("rpe >= 6 AND rpe <= 10", name="check_rpe_range"),
     
     )
+
+
