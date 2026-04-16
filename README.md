@@ -50,11 +50,11 @@ Users can log workouts, record sets, and analyze performance over time.
 git clone <your-repo-url>
 cd <your-repo-folder>
 
-2. Insatll dependencies
+2. Install dependencies
 
 pip install -r requirements.txt
 
-3. Run the server locaally
+3. Run the server locally
 
 uvicorn main:app --reload
 
